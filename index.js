@@ -10,39 +10,38 @@ import connectDB from "./config/db.js";
 connectDB();
 const app = express();
 
-// Test cron job: logs every minute
-cron.schedule("* * * * *", async () => {
-  console.log("[TEST] Cron job running every minute!");
+// cron.schedule("* * * * *", async () => {
+//   console.log("[TEST] Cron job running every minute!");
 
-  const jobs = await fetchJobs();
+//   const jobs = await fetchJobs();
 
-  for (let item of jobs) {
-    const exists = await Job.findOne({ link: item.link });
-    if (exists) continue;
+//   for (let item of jobs) {
+//     const exists = await Job.findOne({ link: item.link });
+//     if (exists) continue;
 
-    const score = await matchJob(item.contentSnippet);
+//     const score = await matchJob(item.contentSnippet);
 
-    const job = await Job.create({
-      title: item.title,
-      link: item.link,
-      description: item.contentSnippet,
-      matchScore: score,
-    });
+//     const job = await Job.create({
+//       title: item.title,
+//       link: item.link,
+//       description: item.contentSnippet,
+//       matchScore: score,
+//     });
 
-    if (score > 75) {
-      await sendTelegram(
-        `🔥 Job Match Found
+//     if (score > 75) {
+//       await sendTelegram(
+//         `🔥 Job Match Found
 
-Title: ${job.title}
-Score: ${score}
-Link: ${job.link}`,
-      );
+// Title: ${job.title}
+// Score: ${score}
+// Link: ${job.link}`,
+//       );
 
-      job.sent = true;
-      await job.save();
-    }
-  }
-});
+//       job.sent = true;
+//       await job.save();
+//     }
+//   }
+// });
 
 const PORT = process.env.PORT || 5000;
 app.get("/", (req, res) => {
