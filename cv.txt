@@ -1,0 +1,96 @@
+Name: Prince Kumar Yadav
+Location: Titagarh, Kolkata, India
+Phone: 9330955959
+Email: princekumary271@gmail.com
+LinkedIn: https://www.linkedin.com/in/prince-yadav-6384b7201
+Experience: 4+ Years
+Primary Role: Front-End & Mobile App Developer
+
+
+PROFESSIONAL SUMMARY:
+Experienced Front-End Developer specializing in React and React Native. Passionate about building responsive web and mobile applications, optimizing performance, and creating seamless user experiences.
+
+
+WORK EXPERIENCE:
+Company: Ogma IT Conceptions Pvt Ltd
+Role: App + Front-End Developer
+Duration: 01/2022 - Present
+Description:
+4+ years of experience building scalable applications using React and React Native for web and mobile platforms. Experienced in full development lifecycle.
+
+
+TECHNICAL SKILLS:
+
+Programming Languages:
+- Kotlin
+- Dart
+- JavaScript
+- TypeScript
+
+Frameworks:
+- React
+- React Native
+- Flutter
+
+Libraries & Tools:
+- Redux Toolkit
+- Redux Saga
+- RTK Query
+- Jetpack Compose
+- Axios
+- Bloc
+- Retrofit
+- Dio
+- Hilt
+- Firebase
+- Agora
+- Socket.io
+- RevenueCat
+
+
+PROJECTS:
+
+1) Sanjeevani
+Technologies: React Native, Redux, Redux-Saga, Firebase, Agora, Socket.io
+Features:
+- Appointment scheduling
+- Chat and video consultation
+- Live session hosting with Agora
+- Android native experience
+
+2) Snappi
+Technologies: React Native, Redux Toolkit, Socket.io, Firebase
+Features:
+- Taxi booking system
+- Real-time tracking
+- Driver matching
+- Payment and rating system
+
+3) IconCal
+Technologies: Flutter, SQLite, Google Calendar API, RevenueCat
+Features:
+- Icon-based event management
+- Google & iOS calendar sync
+- OAuth2 authentication
+- Premium subscription model
+- Local notification scheduling
+
+4) OneWord
+Technologies: Kotlin, Jetpack Compose, MVVM, Room, WorkManager, AlarmManager
+Features:
+- NotificationListenerService
+- Background sync pipeline
+- Room database integration
+- AdMob & RevenueCat monetization
+- Firebase Crashlytics
+
+
+EDUCATION:
+B.Tech in Computer Science and Engineering
+Regent Education And Research Foundation
+2017 - 2021
+
+
+LANGUAGES:
+- Hindi (Fluent)
+- English (Conversational)
