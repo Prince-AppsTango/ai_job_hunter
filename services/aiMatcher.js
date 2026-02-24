@@ -61,7 +61,7 @@ ${jobText.slice(0, 1500)}
       },
       {
         headers: {
-          Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
+          Authorization: `Bearer ${process.env.GROQ_API_KEY?.replace(/^["']|["']$/g, '')}`,
           "Content-Type": "application/json",
         },
       },
