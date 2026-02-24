@@ -11,7 +11,7 @@ connectDB();
 const app = express();
 
 // cron.schedule("* * * * *", async () => {
-//   console.log("[TEST] Cron job running every minute!");
+//   console.log("Cron job running every minute!");
 
 //   const jobs = await fetchJobs();
 
@@ -43,40 +43,86 @@ const app = express();
 //   }
 // });
 
+
+// * * * * *
+// │ │ │ │ │
+// │ │ │ │ └── Day of week (0–7) (Sunday = 0 or 7)
+// │ │ │ └──── Month (1–12)
+// │ │ └────── Day of month (1–31)
+// │ └──────── Hour (0–23)
+// └────────── Minute (0–59)
+
+
 const PORT = process.env.PORT || 5000;
 app.get("/", (req, res) => {
   res.send("AI Job Hunter Running 🚀");
 });
 
 cron.schedule("0 9 * * *", async () => {
-  console.log("Running Job Hunter...");
+  console.log("🚀 Running Job Hunter...");
 
   const jobs = await fetchJobs();
 
+  const threshold = 70;
+
   for (let item of jobs) {
+
+    // 🔹 Skip if already exists
     const exists = await Job.findOne({ link: item.link });
     if (exists) continue;
 
-    const score = await matchJob(item.contentSnippet);
+    // 🔹 Basic keyword filter (cheap filtering)
+    const devKeywords = [
+      "developer",
+      "engineer",
+      "frontend",
+      "react",
+      "javascript",
+      "mobile",
+      "flutter",
+      "kotlin"
+    ];
 
-    const job = await Job.create({
-      title: item.title,
-      link: item.link,
-      description: item.contentSnippet,
-      matchScore: score,
-    });
+    const isRelevant = devKeywords.some(keyword =>
+      item.title.toLowerCase().includes(keyword) ||
+      item.contentSnippet.toLowerCase().includes(keyword)
+    );
 
-    if (score > 75) {
-      await sendTelegram(
-        `🔥 Job Match Found
+    if (!isRelevant) continue;
+
+    // 🔹 AI Match
+    const result = await matchJob(item.contentSnippet);
+    console.log(`Job: ${item.title} | Score: ${result.score}`);
+    // 🔥 Only insert if good match
+    if (result.score >= threshold) {
+
+      const job = await Job.create({
+        title: item.title,
+        link: item.link,
+        description: item.contentSnippet,
+        matchScore: result.score,
+        matchedSkills: result.matchedSkills,
+        missingSkills: result.missingSkills,
+        sent: true,
+      });
+
+      const message = `
+🔥 High Match Job Found
 
 Title: ${job.title}
-Score: ${score}
-Link: ${job.link}`,
-      );
+Score: ${result.score}
 
-      job.sent = true;
-      await job.save();
+✅ Matched Skills:
+${result.matchedSkills.join(", ") || "N/A"}
+
+❌ Missing Skills:
+${result.missingSkills.join(", ") || "None"}
+
+Link:
+${job.link}
+`;
+
+      await sendTelegram(message);
     }
   }
 });
