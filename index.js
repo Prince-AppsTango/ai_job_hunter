@@ -58,7 +58,7 @@ app.get("/", (req, res) => {
   res.send("AI Job Hunter Running 🚀");
 });
 
-cron.schedule("30 3 * * *", async () => {
+cron.schedule("* * * * *", async () => {
   console.log("🚀 Running Job Hunter...");
 
   const jobs = await fetchJobs();
